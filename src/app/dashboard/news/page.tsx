@@ -18,7 +18,6 @@ const NewsPage = () => {
   const [author, setAuthor] = useState('');
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(filters.searchQuery);
 
-  // ➡️ Debounce search query for optimized API calls
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchQuery(filters.searchQuery);
@@ -27,12 +26,10 @@ const NewsPage = () => {
     return () => clearTimeout(handler);
   }, [filters.searchQuery]);
 
-  // ➡️ Dispatch API call with filters
   useEffect(() => {
     dispatch(fetchNews({ ...filters, searchQuery: debouncedSearchQuery }));
   }, [dispatch, filters, debouncedSearchQuery]);
 
-  // ➡️ Handle Filter Changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     if (name === 'author') {
@@ -42,7 +39,6 @@ const NewsPage = () => {
     }
   };
 
-  // ➡️ Conditional data source (API or fallback data)
   const displayData = articles?.length > 0 ? articles : data?.articles || [];
 
   return (
@@ -91,11 +87,9 @@ const NewsPage = () => {
         </select>
       </div>
 
-      {/* Loading and Error Handling */}
       {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500">Error: {error}</p>}
 
-      {/* News Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayData
           ?.filter((article: any) =>
