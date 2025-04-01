@@ -8,6 +8,7 @@ import Header from '../dashboard/Header';
 const NewsPage = () => {
   const dispatch = useAppDispatch();
   const { articles, loading, error } = useAppSelector((state) => state.news);
+  const displayArticles = articles?.length ? articles : data.articles;
 
   const [filters, setFilters] = useState({
     searchQuery: '',
@@ -67,7 +68,7 @@ const NewsPage = () => {
 
         {/* News Cards Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data?.articles
+          {displayArticles
             ?.filter((article) =>
               author ? article.author?.toLowerCase().includes(author.toLowerCase()) : true
             )
