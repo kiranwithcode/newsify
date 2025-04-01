@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiKey = 'd522d2df90ca43d0b74bc7bac83d4433';
+const apiKey = process.env.NEXT_PUBLIC_NEWS_API;
 const BASE_URL = 'https://newsapi.org/v2/everything';
 
 export interface NewsFilters {
